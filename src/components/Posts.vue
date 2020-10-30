@@ -16,7 +16,7 @@
             <td>{{ post.description }}</td>
             <td align="center">
               <router-link v-bind:to="{ name: 'EditPost', params: { id: post._id } }">Edit</router-link>
-              <a href="#">Delete</a>
+              <a href="#" @click="deletePost(post._id)">Delete</a>
             </td>
           </tr>
         </table>
@@ -45,6 +45,10 @@ export default {
     async getPosts () {
       const response = await PostsService.fetchPosts()
       this.posts = response.data.posts
+    },
+    async deletePost (id) {
+      await PostsService.deletePost(id)
+      this.$router.go({ path: '/' })
     }
   }
 }
