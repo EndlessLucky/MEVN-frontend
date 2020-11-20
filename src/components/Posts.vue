@@ -33,13 +33,13 @@ import PostsService from '../services/PostsService'
 
 export default {
   name: 'Posts',
-  data () {
-    return {
-      posts: []
-    }
-  },
   mounted () {
-    this.getPosts()
+    this.$store.dispatch('GET_POST')
+  },
+  computed: {
+    posts () {
+      return this.$store.getters.POSTS
+    }
   },
   methods: {
     async getPosts () {
